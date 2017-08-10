@@ -81,17 +81,17 @@ class MenuController
   def search_entries
   end
 
-  def entry_by_number
+  def entry_by_number(error=false)
     system "clear"
+    puts "sorry the number you provided is not a valid entry. please make another selection" if error
     puts "Please specify an entry number"
 
-    selection = gets.chomp.to_i
+    selection = gets.chomp.to_i - 1
 
-    if address_book.entries[selection]
+    if selection >= 0 && selection < address_book.entries.length
       puts address_book.entries[selection].to_s
     else
-      puts "sorry the number you provided is not a valid entry. please make another selection"
-      entry_by_number
+      entry_by_number(true)
     end
   end
 
